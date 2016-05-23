@@ -1,7 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 using Xamarin.Forms;
+using System;
+
+#if __ANDROID__
+using GitHubClient.Droid;
+using Xamarin.Forms.Platform.Android;
+using Android.Views;
+#endif
+
+
 
 namespace GitHubClient
 {
@@ -21,6 +28,16 @@ namespace GitHubClient
 				avatar.Source = user.Avatar_Url;
 				username.Text = user.Login;
 			}
+
+			var stack = (StackLayout)Content;
+
+			#if __ANDROID__
+			//let's make a FAB and add it for Android only
+			var fab = new CheckableFab(Forms.Context);
+			fab.SetImageResource(Android.Resource.Drawable.IcMenuSearch);
+
+			stack.Children.Add(fab);
+			#endif
 		}
 
 		async void OnViewReposClicked(object sender, EventArgs args)
