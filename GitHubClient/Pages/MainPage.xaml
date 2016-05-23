@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+		x:Class="GitHubClient.MainPage"
+		Title="GitHub Client">
+	<ScrollView>
+		<StackLayout>
+			<Image Source="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" />
+			<Entry x:Name="username" 
+				Placeholder="Enter Username" 
+				HorizontalOptions="Center" 
+				VerticalOptions="Center"/>
+    		<Button x:Name="button"
+				Text="View Profile"
+	            HorizontalOptions="Center"
+	            VerticalOptions="Center"
+	            Clicked="OnViewProfileClicked" />
+			<ActivityIndicator x:Name="spinner" Color="Red" IsRunning="false" />
+		</StackLayout>
+	</ScrollView>
+</ContentPage>

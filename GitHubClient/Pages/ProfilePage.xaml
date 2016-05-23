@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="GitHubClient.ProfilePage"
+		Title="User Profile">
+	<StackLayout Padding="10">
+
+		<Image x:Name="avatar" Source="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" />
+
+		<Label x:Name="username"
+				FontSize="20" 
+				HorizontalOptions="Center"/>
+				
+	    <Button Text="My Repos"
+	            HorizontalOptions="Center"
+	            VerticalOptions="Center"
+	            Clicked="OnViewReposClicked" />
+
+		<Button Text="My Followers"
+	            HorizontalOptions="Center"
+	            VerticalOptions="Center"
+	            Clicked="OnViewFollowersClicked" />
+
+		<Button Text="Users I'm Following"
+	            HorizontalOptions="Center"
+	            VerticalOptions="Center"
+	            Clicked="OnViewFollowingClicked" />
+		
+  	</StackLayout>
+</ContentPage>
