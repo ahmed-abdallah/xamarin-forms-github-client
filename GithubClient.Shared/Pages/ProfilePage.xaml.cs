@@ -1,6 +1,7 @@
 ﻿
 using Xamarin.Forms;
 using System;
+using System.Threading.Tasks;
 
 #if __ANDROID__
 using GitHubClient.Droid;
@@ -29,14 +30,49 @@ namespace GitHubClient
 				username.Text = user.Login;
 			}
 
-			var stack = (StackLayout)Content;
+			var pageLayout = (StackLayout)Content;
+
+			var absolute = new AbsoluteLayout()
+			{
+				VerticalOptions = LayoutOptions.FillAndExpand,
+				HorizontalOptions = LayoutOptions.FillAndExpand
+			};
+
+			// Position the pageLayout to fill the entire screen.
+			// Manage positioning of child elements on the page by editing the pageLayout.
+			AbsoluteLayout.SetLayoutFlags(pageLayout, AbsoluteLayoutFlags.All);
+			AbsoluteLayout.SetLayoutBounds(pageLayout, new Rectangle(0f, 0f, 1f, 1f));
+			absolute.Children.Add(pageLayout);
+
+
+			var stack = new StackLayout
+			{
+				Padding = 8,
+				HorizontalOptions = LayoutOptions.Center,
+			};
 
 			#if __ANDROID__
 			//let's make a FAB and add it for Android only
 			var fab = new CheckableFab(Forms.Context);
 			fab.SetImageResource(Android.Resource.Drawable.IcMenuSearch);
 
+			fab.Click += async (sender, e) =>
+			{
+				await Navigation.PopAsync();
+			};
+
+
+			fab.UseCompatPadding = true;
+
 			stack.Children.Add(fab);
+
+			absolute.Children.Add(stack);
+			// Overlay the FAB in the bottom-right corner
+			AbsoluteLayout.SetLayoutFlags(stack, AbsoluteLayoutFlags.PositionProportional);
+			AbsoluteLayout.SetLayoutBounds(stack, new Rectangle(1f, 1f, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
+
+			// set our page content to the new layout with FAB
+			this.Content = absolute;
 			#endif
 		}
 
