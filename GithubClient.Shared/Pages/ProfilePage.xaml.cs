@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using GitHubClient.Droid;
 using Xamarin.Forms.Platform.Android;
 using Android.Views;
+using com.refractored.fab;
 #endif
 
 
@@ -45,35 +46,35 @@ namespace GitHubClient
 			absolute.Children.Add(pageLayout);
 
 
-			var stack = new StackLayout
-			{
-				Padding = 8,
-				HorizontalOptions = LayoutOptions.Center,
-			};
-
+			/*
 			#if __ANDROID__
-			//let's make a FAB and add it for Android only
-			var fab = new CheckableFab(Forms.Context);
-			fab.SetImageResource(Android.Resource.Drawable.IcMenuSearch);
+				//let's make a FAB and add it for Android only
+				var fab = new FloatingActionButton(Forms.Context);
+				fab.SetImageResource(Android.Resource.Drawable.IcMenuSearch);
 
-			fab.Click += async (sender, e) =>
-			{
-				await Navigation.PopAsync();
-			};
+				fab.Click += async (sender, e) =>
+				{
+					await Navigation.PopAsync();
+				};
 
+				// make a layout holder for our FAB
+				var stack = new StackLayout
+				{
+					Padding = 8,
+					HorizontalOptions = LayoutOptions.Center,
+				};
 
-			fab.UseCompatPadding = true;
+				// add the FAB to it
+				stack.Children.Add(fab);
+				absolute.Children.Add(stack);
 
-			stack.Children.Add(fab);
-
-			absolute.Children.Add(stack);
-			// Overlay the FAB in the bottom-right corner
-			AbsoluteLayout.SetLayoutFlags(stack, AbsoluteLayoutFlags.PositionProportional);
-			AbsoluteLayout.SetLayoutBounds(stack, new Rectangle(1f, 1f, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
-
-			// set our page content to the new layout with FAB
-			this.Content = absolute;
+				// Overlay the FAB in the bottom-right corner
+				AbsoluteLayout.SetLayoutFlags(stack, AbsoluteLayoutFlags.PositionProportional);
+				AbsoluteLayout.SetLayoutBounds(stack, new Rectangle(1f, 1f, AbsoluteLayout.AutoSize, AbsoluteLayout.AutoSize));
 			#endif
+			*/
+
+			this.Content = absolute;
 		}
 
 		async void OnViewReposClicked(object sender, EventArgs args)
